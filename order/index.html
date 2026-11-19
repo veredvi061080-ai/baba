@@ -19,6 +19,31 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:#F4F1EA}
 a{color:#4E5E2F}a:hover{color:#36421F}
+.oform[hidden]{display:none}
+.oform{width:100%;box-sizing:border-box;background:#2A3530;border:1px solid #3B4842;border-radius:16px;padding:24px 22px;text-align:right;display:flex;flex-direction:column;gap:14px}
+.oform h3{margin:0;font-family:'Frank Ruhl Libre',serif;font-size:1.5rem;color:#F4F1EA}
+.oform .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.oform .f{display:flex;flex-direction:column;gap:6px;font-size:.98rem;color:#E3E8E4}
+.oform input,.oform textarea{font:inherit;font-size:16px;color:#1E2622;background:#F4F1EA;border:2px solid transparent;border-radius:10px;padding:12px 14px;min-height:48px;box-sizing:border-box;width:100%}
+.oform input:focus,.oform textarea:focus{outline:none;border-color:#C9A24A}
+.oform .bad input{border-color:#E8836B}
+.oform .msg{font-style:normal;font-size:.85rem;color:#F0A08C;min-height:0}
+.oform .qty{display:flex;align-items:center;gap:8px}
+.oform .qty button{width:48px;height:48px;border-radius:10px;border:0;background:#C9A24A;color:#1E2622;font-size:1.4rem;font-weight:700;cursor:pointer}
+.oform .qty input{text-align:center;width:64px;flex:none}
+.oform .tot{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px;border-top:1px solid #3B4842;padding-top:14px}
+.oform .tot strong{font-family:'Frank Ruhl Libre',serif;font-size:2.2rem;color:#C9A24A}
+.oform .tot small{width:100%;color:#C9D1CB}
+.oform .go{display:flex;align-items:center;justify-content:center;min-height:56px;border:0;border-radius:999px;background:#C9A24A;color:#1E2622;font:inherit;font-weight:700;font-size:1.2rem;text-decoration:none;cursor:pointer}
+.oform .go.wa{background:#F4F1EA}
+.oform .fine{margin:0;font-size:.9rem;color:#AEB8B1}
+.oform .sum{background:#1E2622;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;color:#E3E8E4}
+.oform .link{align-self:flex-start;background:none;border:0;padding:0;color:#C9A24A;text-decoration:underline;font:inherit;cursor:pointer}
+.oform .step{margin:0;color:#E3E8E4}
+.oform .bit{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:#F4F1EA;color:#1E2622;border-radius:12px;padding:10px 14px}
+.oform .bit strong{font-size:1.6rem;letter-spacing:.04em}
+.oform .bit button{min-height:44px;border-radius:999px;border:0;background:#1E2622;color:#F4F1EA;padding:0 18px;font:inherit;font-weight:600;cursor:pointer}
+@media (max-width:560px){.oform .row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -210,9 +235,50 @@ a{color:#4E5E2F}a:hover{color:#36421F}
         <span style="font-family: 'Frank Ruhl Libre', serif; font-size: 1.5rem; font-weight: 700; color: #F4F1EA">50 הרוכשים הראשונים מקבלים ייעוץ אישי חינם עם המאסטר אלון ג'ייקוב</span>
         <span style="color: #C9D1CB">פגישת ייעוץ בשווי 400 ₪, במתנה עם החפיסה</span>
       </div>
-      <div style="font-family: 'Frank Ruhl Libre', serif; font-size: 2.6rem; font-weight: 700; color: #C9A24A">250 ₪</div>
-      <a href="https://wa.me/972509333025?text=%D7%A9%D7%9C%D7%95%D7%9D%21%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%94%D7%96%D7%9E%D7%99%D7%9F%20%D7%90%D7%AA%20%D7%97%D7%A4%D7%99%D7%A1%D7%AA%20%D7%91%D7%90%D7%91%D7%90%20%F0%9F%99%8F" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 44px; border-radius: 999px; background: #C9A24A; color: #1E2622; font-weight: 700; font-size: 1.2rem; text-decoration: none">להזמנה בוואטסאפ</a>
-      <p style="margin: 0; font-size: 1rem; color: #C9D1CB">משלמים בביט או בפייבוקס למספר 058-5515948 (אלון ג'ייקוב), שולחים לנו את פרטי המשלוח בוואטסאפ, ונעדכן כשהחפיסה יוצאת למשלוח.</p>
+      <form id="orderForm" class="oform" novalidate>
+        <h3>פרטי המשלוח</h3>
+        <div class="row">
+          <label class="f"><span>שם מלא *</span><input name="name" autocomplete="name" required><em class="msg"></em></label>
+          <label class="f"><span>טלפון נייד *</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" required><em class="msg"></em></label>
+        </div>
+        <label class="f"><span>מייל (לקבלה, לא חובה)</span><input name="email" type="email" autocomplete="email" dir="ltr"><em class="msg"></em></label>
+        <div class="row">
+          <label class="f"><span>עיר / יישוב *</span><input name="city" autocomplete="address-level2" required><em class="msg"></em></label>
+          <label class="f"><span>רחוב ומספר בית *</span><input name="street" autocomplete="street-address" required><em class="msg"></em></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>דירה / קומה / כניסה</span><input name="apt"><em class="msg"></em></label>
+          <div class="f"><span>כמות חפיסות</span>
+            <div class="qty"><button type="button" id="oPlus" aria-label="עוד חפיסה">+</button><input id="oQty" value="1" readonly aria-label="כמות"><button type="button" id="oMinus" aria-label="חפיסה פחות">−</button></div>
+          </div>
+        </div>
+        <label class="f"><span>הערות לשליח או הקדשה למתנה</span><textarea name="notes" rows="2"></textarea><em class="msg"></em></label>
+        <div class="tot"><span>סה"כ לתשלום</span><strong id="oTotal">250 ₪</strong><small id="oShip"></small></div>
+        <button class="go" type="submit">המשך לתשלום</button>
+        <p class="fine">הפרטים משמשים רק למשלוח החפיסה.</p>
+      </form>
+
+      <div id="orderPay" class="oform" hidden>
+        <h3>תשלום</h3>
+        <div class="sum">
+          <div>מספר הזמנה: <b id="pId"></b></div>
+          <div id="pSum"></div>
+          <div id="pAddr"></div>
+          <button type="button" class="link" id="pEdit">עריכת הפרטים</button>
+        </div>
+        <div id="payBit">
+          <p class="step"><b>1.</b> משלמים בביט או בפייבוקס למספר:</p>
+          <div class="bit"><strong dir="ltr" id="pBit">058-5515948</strong><button type="button" id="pCopy">העתקת המספר</button></div>
+          <p class="fine" id="pBitName">על שם אלון ג'ייקוב</p>
+          <p class="step"><b>2.</b> אחרי התשלום שולחים לנו את ההזמנה בוואטסאפ, והחפיסה יוצאת למשלוח.</p>
+        </div>
+        <div id="payGrow" hidden>
+          <p class="step"><b>1.</b> תשלום מאובטח באשראי או בביט:</p>
+          <a class="go" id="payGrowBtn" href="#" target="_blank" rel="noopener">לתשלום מאובטח</a>
+          <p class="step"><b>2.</b> אחרי התשלום שולחים לנו את ההזמנה בוואטסאפ.</p>
+        </div>
+        <button class="go wa" type="button" id="pDone">שילמתי, שליחת ההזמנה בוואטסאפ</button>
+      </div>
     </div>
   </section>
 
@@ -221,5 +287,8 @@ a{color:#4E5E2F}a:hover{color:#36421F}
   </footer>
 
 </div>
+<script src="../js/config.js"></script>
+<script src="../js/track.js"></script>
+<script src="../js/order.js"></script>
 </body>
 </html>
