@@ -43,7 +43,8 @@ main{max-width:760px;margin:0 auto;padding:28px 20px 60px}
 h1{font-family:var(--serif);font-size:40px;line-height:1.2;color:var(--gold-deep)}
 .group{color:var(--gold-3);font-size:15px;margin:6px 0 22px}
 .card{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:28px;align-items:start}
-.card img{width:100%;aspect-ratio:2/3;object-fit:contain;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.18);background:#fff}
+.card img{width:100%;height:auto;display:block;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.verse cite{display:block;font-family:var(--sans);font-style:normal;font-size:14px;color:var(--gold-3);margin-top:6px}
 .verse{font-family:var(--serif);font-size:20px;border-inline-start:3px solid var(--gold-2);padding-inline-start:14px;margin-bottom:18px}
 .meaning h2,.more h2{font-family:var(--serif);font-size:22px;color:var(--gold-deep);margin-bottom:6px}
 .meaning p{font-size:18px}
@@ -106,7 +107,7 @@ cards.forEach((c, i) => {
   const ld = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "DefinedTerm", name: c.name, description: c.text, url: SITE + path,
+      { "@type": "DefinedTerm", name: c.name, description: verse ? `${c.text} (${verse.ref})` : c.text, url: SITE + path,
         inDefinedTermSet: { "@type": "DefinedTermSet", name: "חפיסת באבא - 72 קלפים", url: `${SITE}/cards/` },
         ...(c.image ? { image: `${SITE}/${c.image}` } : {}) },
       crumbsLd([["באבא", `${SITE}/`], ["כל הקלפים", `${SITE}/cards/`], [c.name, SITE + path]]),
@@ -116,11 +117,11 @@ cards.forEach((c, i) => {
 <main>
 <div class="crumbs"><a href="${SITE}/">באבא</a> › <a href="${SITE}/cards/">כל הקלפים</a> › ${esc(GROUP_LABEL[c.group])}</div>
 <div class="card">
-${c.image ? `<img src="${SITE}/${c.image}" alt="קלף ${esc(c.name)} מחפיסת באבא" width="600" height="900">` : `<div></div>`}
+${c.image ? `<img src="${SITE}/${c.image}" alt="קלף ${esc(c.name)} מחפיסת באבא" loading="eager">` : `<div></div>`}
 <div>
 <h1>${esc(c.name)}</h1>
 <div class="group">${esc(GROUP_LABEL[c.group])}</div>
-${verse ? `<blockquote class="verse">${esc(verse)}</blockquote>` : ""}
+${verse ? `<blockquote class="verse">"${esc(verse.text)}"<cite>${esc(verse.ref)}</cite></blockquote>` : ""}
 <div class="meaning"><h2>משמעות הקלף</h2><p>${esc(c.text)}</p></div>
 <a class="cta" href="${SITE}/order/">להזמנת חפיסת באבא</a>
 </div></div>
