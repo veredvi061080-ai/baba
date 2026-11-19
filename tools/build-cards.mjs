@@ -78,7 +78,8 @@ ${image ? `<meta property="og:image" content="${SITE}/${image}">` : ""}
 <header class="top"><a class="logo" href="${SITE}/">באבא</a>
 <nav><a href="${SITE}/cards/">כל הקלפים</a><a href="${SITE}/order/">להזמנת החפיסה</a></nav></header>`;
 
-const foot = `<footer>חפיסת באבא · 72 קלפי ייעוץ והכוונה בהשראת ספר בראשית</footer></body></html>\n`;
+const foot = (track = "") => `<footer>חפיסת באבא · 72 קלפי ייעוץ והכוונה בהשראת ספר בראשית</footer>
+<script src="${SITE}/js/config.js"></script><script src="${SITE}/js/track.js"></script>${track}</body></html>\n`;
 
 // Internal links/images become relative (canonical, og and JSON-LD stay absolute), so the
 // same files work on GitHub Pages under /baba/, on the final domain and in local preview.
@@ -129,7 +130,7 @@ ${siblings.length ? `<div class="more"><h2>עוד קלפים ב${esc(GROUP_LABEL
     .map((s) => `<li><a href="${SITE}/cards/${slugs[s.name]}/">${esc(s.name)}</a></li>`).join("")}</ul></div>` : ""}
 <div class="pager"><a href="${SITE}/cards/${slugs[next.name]}/">→ ${esc(next.name)}</a><a href="${SITE}/cards/${slugs[prev.name]}/">${esc(prev.name)} ←</a></div>
 </main>
-${foot}`;
+${foot(`<script>babaTrack('ViewContent',{content_name:${JSON.stringify(c.name).replace(/</g, "\\u003c")},content_category:${JSON.stringify(GROUP_LABEL[c.group])}})</script>`)}`;
   mkdirSync(`cards/${slug}`, { recursive: true });
   writeFileSync(`cards/${slug}/index.html`, relativize(html, 2));
 });
@@ -156,7 +157,7 @@ ${groups.map((g) => `<section><h2>${esc(GROUP_LABEL[g])}</h2><ul class="grid">${
     .map((c) => `<li><a href="${SITE}/cards/${slugs[c.name]}/">${esc(c.name)}</a></li>`).join("")}</ul></section>`).join("\n")}
 <a class="cta" href="${SITE}/order/">להזמנת חפיסת באבא</a>
 </main>
-${foot}`, 1));
+${foot()}`, 1));
 
 // ---- sitemap ----
 const today = new Date().toISOString().slice(0, 10);

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>תודה על ההזמנה | באבא</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&amp;family=Assistant:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1E2622;color:#F4F1EA;font-family:'Assistant',system-ui,sans-serif;line-height:1.6}
+main{max-width:560px;margin:0 auto;padding:72px 24px;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center}
+h1{margin:0;font-family:'Frank Ruhl Libre',serif;font-size:clamp(2rem,6vw,2.8rem);color:#C9A24A}
+p{margin:0;font-size:1.1rem;color:#C9D1CB}
+.box{width:100%;box-sizing:border-box;background:#2A3530;border-radius:14px;padding:16px 18px;color:#E3E8E4}
+a.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 30px;border-radius:999px;background:#C9A24A;color:#1E2622;font-weight:700;text-decoration:none}
+a.wa{color:#C9A24A}
+</style>
+</head>
+<body>
+<main>
+  <h1>תודה, ההזמנה התקבלה</h1>
+  <div class="box" id="tBox" hidden></div>
+  <p>אם הוואטסאפ לא נפתח, <a class="wa" id="tWa" href="#">לחצו כאן לשליחת ההזמנה</a>. נעדכן כשהחפיסה יוצאת למשלוח.</p>
+  <p>בינתיים אפשר להכיר את הקלפים:</p>
+  <a class="btn" href="../../cards/">לכל 72 הקלפים</a>
+</main>
+<script src="../../js/config.js"></script>
+<script src="../../js/track.js"></script>
+<script>
+(function () {
+  var o = null; try { o = JSON.parse(sessionStorage.getItem('babaOrder')); } catch (e) {}
+  if (!o) { document.getElementById('tWa').closest('p').hidden = true; return; }
+  var b = document.getElementById('tBox'); b.hidden = false;
+  b.textContent = 'מספר הזמנה ' + o.id + ' · ' + o.qty + ' × חפיסת באבא · ' + o.total + ' ₪';
+  document.getElementById('tWa').href = 'https://wa.me/' + BABA_CONFIG.waPhone + '?text=' + encodeURIComponent('הזמנה ' + o.id + ' - ' + o.name + ', ' + o.street + ', ' + o.city + ', ' + o.phone);
+  // Purchase fires once per order, even if the page is reloaded.
+  var key = 'babaTracked_' + o.id;
+  if (!sessionStorage.getItem(key)) {
+    babaTrack('Purchase', { currency: 'ILS', value: o.total, num_items: o.qty, content_name: 'חפיסת באבא', order_id: o.id, eventID: o.id });
+    sessionStorage.setItem(key, '1');
+  }
+})();
+</script>
+</body>
+</html>
