@@ -14,6 +14,8 @@ const verses = existsSync("data/verses.json") ? JSON.parse(readFileSync("data/ve
 const config = readFileSync("js/config.js", "utf8");
 const PRICE = Number((config.match(/price:\s*(\d+)/) || [])[1] || 250);
 const { cards, meta } = loadCards();
+// Cache-buster for css/js links: GitHub Pages lets browsers keep files for 10 minutes.
+const V = Date.now().toString(36);
 
 const GROUP_LABEL = {
   days: "ימי הבריאה",
@@ -59,7 +61,7 @@ ${image ? `<meta property="og:image" content="${SITE}/${image}">` : ""}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${SITE}/css/cards.css">
+<link rel="stylesheet" href="${SITE}/css/cards.css?v=${V}">
 ${preload ? `<link rel="preload" as="image" href="${SITE}/${preload}">` : ""}
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>
 </head><body>
@@ -78,7 +80,7 @@ const foot = (track = "") => `<footer><div class="wrap">
 <span>חפיסת באבא · 72 קלפי ייעוץ והכוונה בהשראת ספר בראשית</span>
 <span><a href="${SITE}/cards/">כל הקלפים</a> · <a href="${SITE}/order/">הזמנה</a> · <a href="https://www.instagram.com/baba713994" target="_blank" rel="noopener">אינסטגרם</a></span>
 </div></footer>
-<script src="${SITE}/js/config.js"></script><script src="${SITE}/js/track.js"></script>${track}
+<script src="${SITE}/js/config.js?v=${V}"></script><script src="${SITE}/js/track.js?v=${V}"></script>${track}
 </body></html>\n`;
 
 // Gentle 3D tilt of the hero card toward the pointer (skipped for touch and reduced motion).
