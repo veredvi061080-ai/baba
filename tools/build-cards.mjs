@@ -77,7 +77,7 @@ const band = `<section class="wrap"><div class="band">
 </div></section>`;
 
 const foot = (track = "") => `<footer><div class="wrap">
-<span>חפיסת באבא · 72 קלפי ייעוץ והכוונה בהשראת ספר בראשית</span>
+<span>© 2026 כל הזכויות שמורות לאלון ג'ייקוב ולורד וילצ'יק</span>
 <span><a href="${SITE}/cards/">כל הקלפים</a> · <a href="${SITE}/order/">הזמנה</a> · <a href="https://www.instagram.com/baba713994" target="_blank" rel="noopener">אינסטגרם</a></span>
 </div></footer>
 <script src="${SITE}/js/config.js?v=${V}"></script><script src="${SITE}/js/track.js?v=${V}"></script>${track}
