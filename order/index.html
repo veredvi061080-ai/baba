@@ -43,6 +43,11 @@ a{color:#4E5E2F}a:hover{color:#36421F}
 .oform .bit{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:#F4F1EA;color:#1E2622;border-radius:12px;padding:10px 14px}
 .oform .bit strong{font-size:1.6rem;letter-spacing:.04em}
 .oform .bit button{min-height:44px;border-radius:999px;border:0;background:#1E2622;color:#F4F1EA;padding:0 18px;font:inherit;font-weight:600;cursor:pointer}
+.oform .apps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.oform .apps.sm{justify-content:center;font-size:.9rem;color:#AEB8B1}
+.oform .app{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;border-radius:999px;font-weight:700;font-size:.92rem;color:#fff}
+.oform .app.bit{background:#00b2a9}
+.oform .app.pbx{background:#1a3c8f}
 @media (max-width:560px){.oform .row{grid-template-columns:1fr}}
 </style>
 </head>
@@ -255,6 +260,7 @@ a{color:#4E5E2F}a:hover{color:#36421F}
         <label class="f"><span>הערות לשליח או הקדשה למתנה</span><textarea name="notes" rows="2"></textarea><em class="msg"></em></label>
         <div class="tot"><span>סה"כ לתשלום</span><strong id="oTotal">250 ₪</strong><small id="oShip"></small></div>
         <button class="go" type="submit">המשך לתשלום</button>
+        <div class="apps sm"><span>תשלום ב:</span><span class="app bit">bit ביט</span><span class="app pbx">PayBox פייבוקס</span></div>
         <p class="fine">הפרטים משמשים רק למשלוח החפיסה.</p>
       </form>
 
@@ -268,6 +274,7 @@ a{color:#4E5E2F}a:hover{color:#36421F}
         </div>
         <div id="payBit">
           <p class="step"><b>1.</b> משלמים בביט או בפייבוקס למספר:</p>
+          <div class="apps"><span class="app bit">bit ביט</span><span class="app pbx">PayBox פייבוקס</span></div>
           <div class="bit"><strong dir="ltr" id="pBit">058-5515948</strong><button type="button" id="pCopy">העתקת המספר</button></div>
           <p class="fine" id="pBitName">על שם אלון ג'ייקוב</p>
           <p class="step"><b>2.</b> אחרי התשלום שולחים לנו את ההזמנה בוואטסאפ, והחפיסה יוצאת למשלוח.</p>
@@ -287,8 +294,8 @@ a{color:#4E5E2F}a:hover{color:#36421F}
   </footer>
 
 </div>
-<script src="../js/config.js"></script>
-<script src="../js/track.js"></script>
-<script src="../js/order.js"></script>
+<script src="../js/config.js?v=20261122b"></script>
+<script src="../js/track.js?v=20261122b"></script>
+<script src="../js/order.js?v=20261122b"></script>
 </body>
 </html>

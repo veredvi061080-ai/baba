@@ -1,7 +1,7 @@
 // Site settings in one place. Fill an empty value and the feature turns on, no other edits needed.
 window.BABA_CONFIG = {
   price: 250,               // deck price in ILS
-  shipping: null,           // shipping fee in ILS, null = not shown on the page
+  shipping: 0,              // shipping fee in ILS: 0 = "כולל משלוח", null = not shown (Vered 22.11: 250 incl. shipping)
   maxQty: 5,
 
   payUrl: "",               // Grow payment page link. Empty = pay with Bit / PayBox below
