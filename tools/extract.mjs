@@ -13,6 +13,11 @@ export function loadCards(indexPath = "index.html") {
   const groups = grab(src, "CATEGORY_INTERPRETATIONS");
   const meta = grab(src, "CATEGORY_META");
   const images = grab(src, "CARD_IMAGES");
+  // Day and season cards are not in CARD_IMAGES; their images sit in the gallery as
+  // <figure data-card="name"><img src="assets/x.jpg">. Fill any gaps from there.
+  for (const m of src.matchAll(/data-card="([^"]+)"[^>]*>\s*<img[^>]*src="(assets\/[^"]+\.jpg)"/g)) {
+    if (!images[m[1]]) images[m[1]] = m[2];
+  }
   const cards = [];
   for (const [group, entries] of Object.entries(groups)) {
     for (const [name, text] of Object.entries(entries)) {
