@@ -9,6 +9,6 @@ window.BABA_CONFIG = {
   bitName: "אלון ג'ייקוב",
   waPhone: "972509333025",  // WhatsApp number that receives orders (international format)
 
-  metaPixelId: "",          // Meta Pixel ID (digits only). Empty = pixel not loaded
+  metaPixelId: "1494886862561443",          // Meta Pixel ID (digits only). Empty = pixel not loaded
   ga4Id: "G-T3BDKWD4XH"               // Google Analytics 4 ID (G-XXXXXXX). Empty = GA4 not loaded
 };
