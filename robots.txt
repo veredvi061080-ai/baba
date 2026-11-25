@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://veredvi061080-ai.github.io/baba/sitemap.xml
+Sitemap: https://babaoracle.com/sitemap.xml

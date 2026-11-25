@@ -8,7 +8,7 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs";
 import { loadCards } from "./extract.mjs";
 
-const SITE = (process.env.SITE_URL || "https://veredvi061080-ai.github.io/baba").replace(/\/$/, "");
+const SITE = (process.env.SITE_URL || "https://babaoracle.com").replace(/\/$/, "");
 const slugs = JSON.parse(readFileSync("data/slugs.json", "utf8"));
 const verses = existsSync("data/verses.json") ? JSON.parse(readFileSync("data/verses.json", "utf8")) : {};
 const config = readFileSync("js/config.js", "utf8");
